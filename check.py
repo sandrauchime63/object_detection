@@ -4,6 +4,7 @@ import json
 import torch
 #from ultralytics import YOLO
 
+
 path=Path("License-Plate-Recognition-13", "train")
 loop=list(path.iterdir())
 images=path / "images"
@@ -29,10 +30,13 @@ with open(annotations_dir, 'r') as f:
 # 'file_name': 'xemay1235_jpg.rf.9ec4ba864fe9c996c3c4ff30ff7f37f3.jpg', 
 # 'height': 294, 'width': 460, 'date_captured': '2026-01-26T09:42:31+00:00', 
 # 'extra': {'name': 'xemay1235.jpg'}}
+
+
+
 def yolo_bbox(bbox, width, height):
     x, y, w, h=bbox
-    x_center = (x + w/2) / width
-    y_center = (y + h/2) / height
+    x_center = (x + w)/2 / width
+    y_center = (y + h)/2 / height
     bb_width = w / width
     bb_height = h / height
     return [x_center, y_center, bb_width, bb_height]
@@ -49,21 +53,27 @@ def get_info(data):
         width=image['width']
         height=image['height']
         bbox=annotation['bbox']
-        id=annotation['category_id']
+        id=0
         yolo_box=yolo_bbox(bbox, width, height)
-        label=[[id] + yolo_box]
+        label=[id] + yolo_box
         if name not in check:
             check[name]=[]
         check[name].append(label)
 
 
     return check
+
+
+
 check=get_info(data)
+
+
 
 
 
 labels_dir=path/'labels'
 labels_dir.mkdir(exist_ok=True)
+
 
 def create_file(result):
     for filename, label in result.items():
@@ -75,6 +85,8 @@ def create_file(result):
 
            
 see=create_file(check)
+
+
 
 """
 print(next(iter(check.items())))
