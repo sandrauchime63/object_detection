@@ -5,7 +5,7 @@ import torch
 #from ultralytics import YOLO
 
 
-path=Path("License-Plate-Recognition-13", "train")
+path=Path("License-Plate-Recognition-13", "valid")
 loop=list(path.iterdir())
 images=path / "images"
 images.mkdir(exist_ok=True)
@@ -16,7 +16,7 @@ for file in loop:
 images_dir=list(images.iterdir())
 
 
-annotations_dir=path/"annotations.json"
+annotations_dir=path/"_annotations.coco.json"
 
 with open(annotations_dir, 'r') as f:
     data=json.load(f)
