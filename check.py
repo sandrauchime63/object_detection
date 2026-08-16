@@ -1,7 +1,7 @@
 from pathlib import Path
 import shutil
 import json
-import torch
+
 #from ultralytics import YOLO
 
 
