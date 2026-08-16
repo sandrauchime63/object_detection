@@ -2,20 +2,22 @@ from pathlib import Path
 import shutil
 import json
 
-#from ultralytics import YOLO
 
-
-path=Path("License-Plate-Recognition-13", "valid")
+# put the paths in a variable identifier
+path=Path("License-Plate-Recognition-13", "train")
+##path=Path("License-Plate-Recognition-13", "test")##
+##path=Path("License-Plate-Recognition-13", "valid")##
 loop=list(path.iterdir())
 images=path / "images"
 images.mkdir(exist_ok=True)
 
+## put all the images in one folder
 for file in loop:
     if file.suffix.lower() in (".jpg", ".jpeg", ".png"):
         shutil.move(file, images / file.name)
 images_dir=list(images.iterdir())
 
-
+## load the annotations to convert to YOLO format
 annotations_dir=path/"_annotations.coco.json"
 
 with open(annotations_dir, 'r') as f:
@@ -32,7 +34,7 @@ with open(annotations_dir, 'r') as f:
 # 'extra': {'name': 'xemay1235.jpg'}}
 
 
-
+## prepare the bounding box data in yolo format
 def yolo_bbox(bbox, width, height):
     x, y, w, h=bbox
     x_center = (x + w)/2 / width
@@ -41,7 +43,7 @@ def yolo_bbox(bbox, width, height):
     bb_height = h / height
     return [x_center, y_center, bb_width, bb_height]
 
-
+##Link the annotations to their matching images 
 def get_info(data):
     image_dict={}
     check={}
@@ -74,7 +76,8 @@ check=get_info(data)
 labels_dir=path/'labels'
 labels_dir.mkdir(exist_ok=True)
 
-
+##create the file for yolo with the xcentre, ycentre, width 
+# and height
 def create_file(result):
     for filename, label in result.items():
         name=labels_dir / Path(filename).with_suffix(".txt")
@@ -88,13 +91,6 @@ see=create_file(check)
 
 
 
-"""
-print(next(iter(check.items())))
-for filename, label in check.items():
-    print(filename)
-    print(label)
-    break
-"""
 
 
             

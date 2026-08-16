@@ -4,5 +4,5 @@ train: License-Plate-Recognition-13/train/images
 val: License-Plate-Recognition-13/valid/images
 test: License-Plate-Recognition-13/test/images
 
-nc: 1  # number of classes1
-names: ['License-Plate']  # class names
+nc: 1  
+names: ['License-Plate']  
