@@ -5,7 +5,7 @@ import matplotlib.patches as patches
 
 images_dir = Path("License-Plate-Recognition-13/train/images")
 labels_dir = Path("License-Plate-Recognition-13/train/labels")
-images_file=list(images_dir.iterdir())[100]
+images_file=list(images_dir.iterdir())[200]
 
 
 
