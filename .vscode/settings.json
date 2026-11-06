@@ -1,0 +1,11 @@
+{
+    "editor.fontSize": 13,
+    "workbench.fontAliasing": "antialiased",
+    "debug.console.fontFamily": "",
+    "debug.console.fontSize": 18,
+    "scm.inputFontSize": 18,
+    "terminal.integrated.fontSize": 18,
+    "editor.fontWeight": "bold",
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda"
+}
