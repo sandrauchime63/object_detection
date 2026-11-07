@@ -1,6 +1,5 @@
 from pathlib import Path
 import json
-from collections import defaultdict
 import cv2
 
 path=Path("License-Plate-Recognition-13", "train")
