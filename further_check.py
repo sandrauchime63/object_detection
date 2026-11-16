@@ -8,23 +8,29 @@ path = Path("License-Plate-Recognition-13", "plate_crops")
 
 # Get all crop image paths and sort them
 images = sorted(path.glob("*.jpg"))
-
 # Select 10 images, starting from index 200
-selected_images = images[300:310]
+selected_images = images[30]
+display = cv.imread(str(selected_images))
+
+original_path=Path("License-Plate-Recognition-13", "train", "images")
+image_paths = sorted(original_path.glob("*.jpg"))
+one_image=image_paths[509]
+image_read=cv.imread(str(one_image))
 
 
-def calculate_blur(image):
-    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-    laplacian = cv.Laplacian(gray, cv.CV_64F).var()
-    return laplacian
+def bilateral_filter(image):
+    filtered_image = cv.bilateralFilter(image, d=9, sigmaColor=75, sigmaSpace=75)
+    return filtered_image
 
 
-def tenengrad(image):
-    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-    gx = cv.Sobel(gray, cv.CV_64F, 1, 0, ksize=3)
-    gy = cv.Sobel(gray, cv.CV_64F, 0, 1, ksize=3)
-    gradient_magnitude = cv.magnitude(gx, gy)
-    return gradient_magnitude.var()
+bilaterl=bilateral_filter(image_read)
+cv.imshow('original', image_read)
+cv.imshow("Bilateral Filtered Image", bilaterl)
+cv.waitKey(0)
+cv.destroyAllWindows()
+
+
+"""
 for i, image_path in enumerate(selected_images):
 
     display = cv.imread(str(image_path))
@@ -49,6 +55,8 @@ for i, image_path in enumerate(selected_images):
     print(window_name)
 cv.waitKey(0)
 cv.destroyAllWindows()
+"""
+
 """
 for img in images:
     image=cv.imread(str(img))
