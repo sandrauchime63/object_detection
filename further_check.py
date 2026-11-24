@@ -6,9 +6,9 @@ import cv2 as cv
 
 path = Path("License-Plate-Recognition-13", "plate_crops")
 
-# Get all crop image paths and sort them
+
 images = sorted(path.glob("*.jpg"))
-# Select 10 images, starting from index 200
+
 selected_images = images[30]
 display = cv.imread(str(selected_images))
 
